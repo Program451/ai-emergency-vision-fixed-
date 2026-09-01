@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+dist/
+
+# Данные и секреты
+backend/.env
+backend/data/incidents.db
+backend/data/snapshots/*.jpg
+backend/data/sample_videos/*.mp4
+backend/data/uploads/*
+backend/models_weights/*.pt
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store

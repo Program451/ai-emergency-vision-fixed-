@@ -1,0 +1,30 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Данные (БД, снапшоты, sample-видео) и веса моделей персистентны
+      # между перезапусками контейнера — просто положи файлы сюда.
+      - ./backend/data:/app/data
+      - ./backend/models_weights:/app/models_weights
+    env_file:
+      - ./backend/.env
+    restart: unless-stopped
+    # Чтобы backend в контейнере видел веб-камеру/OBS Virtual Camera хоста
+    # (source_url "0"/"1"), нужно явно прокинуть устройство внутрь контейнера.
+    # Работает так только на Linux-хостах (Docker Desktop на Windows/Mac
+    # физические /dev/video* внутрь не пробрасывает). Раскомментируй и
+    # поправь путь под свою систему (обычно /dev/video0, проверить: `ls /dev/video*`):
+    # devices:
+    #   - /dev/video0:/dev/video0
+    # Если камера/OBS не видна в Docker — запусти backend напрямую через
+    # ./start-dev.sh, там ограничения нет (уходит прямо на хост).
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

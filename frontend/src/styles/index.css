@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+.pulse-critical {
+  animation: pulse-ring-critical 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+@keyframes pulse-ring-critical {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 180, 171, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(255, 180, 171, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 180, 171, 0);
+  }
+}
+
+.glass-panel {
+  background-color: rgba(28, 43, 60, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(132, 148, 149, 0.2);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.table-row-hover:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Уважаем reduced-motion — pulse-анимации отключаются */
+@media (prefers-reduced-motion: reduce) {
+  .pulse-critical {
+    animation: none;
+  }
+}
